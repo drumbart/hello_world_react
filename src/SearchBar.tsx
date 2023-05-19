@@ -1,4 +1,4 @@
-import {StyledInput} from "./Common";
+import {StyledInput} from "./Styles";
 import React, {useEffect, useMemo} from "react";
 import debounce from 'lodash.debounce';
 

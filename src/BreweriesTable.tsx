@@ -1,4 +1,4 @@
-import {StyledDataCell, StyledHeader, StyledTable} from "./Common";
+import {StyledDataCell, StyledHeader, StyledTable} from "./Styles";
 import {Brewery} from "./models/brewery";
 
 interface BreweriesTableProps {

@@ -3,6 +3,7 @@ import './App.css';
 import {SearchBar} from "./SearchBar";
 import {BreweriesTable} from "./BreweriesTable";
 import {Brewery} from "./models/brewery";
+import {NoResults} from "./NoResults";
 
 function App() {
     const [breweries, setBreweries] = useState<[Brewery]>();
@@ -10,7 +11,7 @@ function App() {
     const getBreweries = async (text: string) => {
         const result = await fetch(
             text.length > 0 ?
-                `https://api.openbrewerydb.org/v1/breweries/search?query=${text}` :
+                `https://api.openbrewerydb.org/v1/breweries/search?query=${encodeURIComponent(text)}` :
                 'https://api.openbrewerydb.org/v1/breweries');
         const jsonResult = await result.json();
         setBreweries(jsonResult);
@@ -23,7 +24,9 @@ function App() {
     return (
         <>
             <SearchBar getBreweries={getBreweries}/>
-            <BreweriesTable breweries={breweries}/>
+            {
+                (breweries && breweries.length > 0) ? <BreweriesTable breweries={breweries}/> : <NoResults/>
+            }
         </>
     );
 }
