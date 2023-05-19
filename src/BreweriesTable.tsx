@@ -2,7 +2,7 @@ import {StyledDataCell, StyledHeader, StyledTable} from "./Styles";
 import {Brewery} from "./models/brewery";
 
 interface BreweriesTableProps {
-    breweries?: [Brewery]
+    breweries: [Brewery]
 }
 
 export function BreweriesTable({breweries}: BreweriesTableProps) {
@@ -16,7 +16,7 @@ export function BreweriesTable({breweries}: BreweriesTableProps) {
                 <StyledHeader>Country</StyledHeader>
             </tr>
             {
-                breweries && breweries.map(brewery =>
+                breweries.map(brewery =>
                     <tr key={brewery.id}>
                         <StyledDataCell>{brewery.name}</StyledDataCell>
                         <StyledDataCell>{brewery.brewery_type}</StyledDataCell>

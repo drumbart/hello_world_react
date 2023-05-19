@@ -5,6 +5,7 @@ import debounce from 'lodash.debounce';
 interface SearchBarProps {
     getBreweries: (text: string) => Promise<void>;
 }
+
 export function SearchBar(props: SearchBarProps) {
     const debouncedChangeHandler = useMemo(
         () => debounce((event: React.ChangeEvent<HTMLInputElement>) => {
