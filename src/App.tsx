@@ -7,28 +7,24 @@ import {Brewery} from "./models/brewery";
 function App() {
     const [breweries, setBreweries] = useState<[Brewery]>();
 
-    const getBreweries = async () => {
-        const result = await fetch('https://api.openbrewerydb.org/v1/breweries');
-        const jsonResult = await result.json();
-        setBreweries(jsonResult);
-    };
-
-    const searchBreweries = async (text: string) => {
-        const result = await fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${text}`);
+    const getBreweries = async (text: string) => {
+        const result = await fetch(
+            text.length > 0 ?
+                `https://api.openbrewerydb.org/v1/breweries/search?query=${text}` :
+                'https://api.openbrewerydb.org/v1/breweries');
         const jsonResult = await result.json();
         setBreweries(jsonResult);
     }
 
-
     useEffect(() => {
-        getBreweries().catch();
+        getBreweries('').catch();
     }, []);
 
     return (
-        <div>
-            <SearchBar getBreweries={getBreweries} searchBreweries={searchBreweries}/>
+        <>
+            <SearchBar getBreweries={getBreweries}/>
             <BreweriesTable breweries={breweries}/>
-        </div>
+        </>
     );
 }
 

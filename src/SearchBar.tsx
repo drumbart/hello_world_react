@@ -3,17 +3,12 @@ import React, {useEffect, useMemo} from "react";
 import debounce from 'lodash.debounce';
 
 interface SearchBarProps {
-    getBreweries: () => Promise<void>;
-    searchBreweries: (text: string) => Promise<void>;
+    getBreweries: (text: string) => Promise<void>;
 }
 export function SearchBar(props: SearchBarProps) {
     const debouncedChangeHandler = useMemo(
         () => debounce((event: React.ChangeEvent<HTMLInputElement>) => {
-            if (event.target.value === '') {
-                props.getBreweries().catch();
-            } else {
-                props.searchBreweries(event.target.value).catch();
-            }
+            props.getBreweries(event.target.value).catch();
         }, 300),
         [props]
     );
