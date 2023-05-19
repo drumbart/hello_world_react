@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {SearchBar} from "./SearchBar";
+import {BreweriesTable} from "./BreweriesTable";
+import {Brewery} from "./models/brewery";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [breweries, setBreweries] = useState<[Brewery]>();
+
+    const getBreweries = async () => {
+        const result = await fetch('https://api.openbrewerydb.org/v1/breweries');
+        const jsonResult = await result.json();
+        setBreweries(jsonResult);
+    };
+
+    const searchBreweries = async (text: string) => {
+        const result = await fetch(`https://api.openbrewerydb.org/v1/breweries/search?query=${text}`);
+        const jsonResult = await result.json();
+        setBreweries(jsonResult);
+    }
+
+
+    useEffect(() => {
+        getBreweries().catch();
+    }, []);
+
+    return (
+        <div>
+            <SearchBar getBreweries={getBreweries} searchBreweries={searchBreweries}/>
+            <BreweriesTable breweries={breweries}/>
+        </div>
+    );
 }
 
 export default App;
