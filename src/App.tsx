@@ -6,7 +6,10 @@ import {Brewery} from "./models/brewery";
 import {NoResults} from "./NoResults";
 
 function App() {
-    const [breweries, setBreweries] = useState<[Brewery]>();
+    const [
+        breweries,
+        setBreweries
+    ] = useState<[Brewery] | null>(null);
 
     const getBreweries = async (text: string) => {
         const result = await fetch(
