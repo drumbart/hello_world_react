@@ -1,15 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {SearchBar} from "./SearchBar";
-import {BreweriesTable} from "./BreweriesTable";
 import {Brewery} from "./models/brewery";
-import {NoResults} from "./NoResults";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BreweriesPage} from "./pages/BreweriesPage";
+import {BreweryDetailsPage} from "./pages/BreweryDetailsPage";
 
 function App() {
     const [
         breweries,
         setBreweries
     ] = useState<[Brewery] | null>(null);
+
+    const [
+        brewery,
+        setBrewery
+    ] = useState<Brewery | null>(null);
 
     const getBreweries = async (text: string) => {
         const result = await fetch(
@@ -26,10 +31,12 @@ function App() {
 
     return (
         <>
-            <SearchBar getBreweries={getBreweries}/>
-            {
-                (breweries && breweries.length > 0) ? <BreweriesTable breweries={breweries}/> : <NoResults/>
-            }
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<BreweriesPage breweries={breweries} getBreweries={getBreweries}/>}/>
+                    <Route path='brewery_details' element={<BreweryDetailsPage brewery={brewery}/>}/>
+                </Routes>
+            </BrowserRouter>
         </>
     );
 }
