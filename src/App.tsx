@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Brewery} from "./models/brewery";
+import {Brewery} from "./models/Brewery";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {BreweriesPage} from "./pages/BreweriesPage";
 import {BreweryDetailsPage} from "./pages/BreweryDetailsPage";
@@ -10,11 +10,6 @@ function App() {
         breweries,
         setBreweries
     ] = useState<[Brewery] | null>(null);
-
-    const [
-        brewery,
-        setBrewery
-    ] = useState<Brewery | null>(null);
 
     const getBreweries = async (text: string) => {
         const result = await fetch(
@@ -31,12 +26,10 @@ function App() {
 
     return (
         <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path='/' element={<BreweriesPage breweries={breweries} getBreweries={getBreweries}/>}/>
-                    <Route path='brewery_details' element={<BreweryDetailsPage brewery={brewery}/>}/>
-                </Routes>
-            </BrowserRouter>
+            <Routes>
+                <Route path='/' element={<BreweriesPage breweries={breweries} getBreweries={getBreweries}/>}/>
+                <Route path='brewery_details/:id' element={<BreweryDetailsPage/>}/>
+            </Routes>
         </>
     );
 }

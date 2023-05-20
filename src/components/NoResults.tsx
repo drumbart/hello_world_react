@@ -1,5 +1,5 @@
-import sad_pepe from "./sad_pepe.png";
-import {StyledEmptyContainer, StyledParagraphWhite} from "./Styles";
+import sad_pepe from "../assets/sad_pepe.png";
+import {StyledEmptyContainer, StyledParagraphWhite} from "../common/Styles";
 import React from "react";
 
 export function NoResults() {

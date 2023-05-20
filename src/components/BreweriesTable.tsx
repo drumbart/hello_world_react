@@ -1,5 +1,6 @@
-import {StyledDataCell, StyledHeader, StyledTable} from "./Styles";
-import {Brewery} from "./models/brewery";
+import {StyledDataCell, StyledHeader, StyledLink, StyledTable} from "../common/Styles";
+import {Brewery} from "../models/Brewery";
+import {Link} from "react-router-dom";
 
 interface BreweriesTableProps {
     breweries: [Brewery]
@@ -18,11 +19,14 @@ export function BreweriesTable({breweries}: BreweriesTableProps) {
             {
                 breweries.map(brewery =>
                     <tr key={brewery.id}>
-                        <StyledDataCell>{brewery.name}</StyledDataCell>
+                        <StyledLink to={`brewery_details/${brewery.id}`}>
+                            <StyledDataCell>{brewery.name}</StyledDataCell>
+                        </StyledLink>
                         <StyledDataCell>{brewery.brewery_type}</StyledDataCell>
                         <StyledDataCell>{brewery.city}</StyledDataCell>
                         <StyledDataCell>{brewery.country}</StyledDataCell>
-                    </tr>)
+                    </tr>
+                )
             }
             </tbody>
         </StyledTable>

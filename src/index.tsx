@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {BrowserRouter} from "react-router-dom";
 
 
 export const GlobalValues = createContext("To jest moj global");
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 root.render(
     <React.StrictMode>
         <GlobalValues.Provider value={"test"}>
-            <App/>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </GlobalValues.Provider>
     </React.StrictMode>
 );

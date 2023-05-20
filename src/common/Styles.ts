@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 export const StyledTable = styled.table`
   width: 100%;
@@ -37,4 +38,9 @@ export const StyledEmptyContainer = styled.div`
 
 export const StyledParagraphWhite = styled.p`
     color: white;
+`
+
+export const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
 `

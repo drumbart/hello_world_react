@@ -1,7 +1,7 @@
-import {BreweriesTable} from "../BreweriesTable";
-import {Brewery} from "../models/brewery";
-import {NoResults} from "../NoResults";
-import {SearchBar} from "../SearchBar";
+import {BreweriesTable} from "../components/BreweriesTable";
+import {Brewery} from "../models/Brewery";
+import {NoResults} from "../components/NoResults";
+import {SearchBar} from "../components/SearchBar";
 import React from "react";
 
 interface BreweriesPageProps {

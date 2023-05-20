@@ -1,14 +1,36 @@
-import {Brewery} from "../models/brewery";
+import {Link, useParams} from "react-router-dom";
+import {StyledLink, StyledParagraphWhite} from "../common/Styles";
+import {useEffect, useState} from "react";
+import {BreweryDetails} from "../models/BreweryDetails";
+import {BreweryDetailsTable} from "../components/BreweryDetailsTable";
 
-interface BreweryDetailsPageProps {
-    brewery: Brewery | null;
-}
-export function BreweryDetailsPage({brewery}: BreweryDetailsPageProps) {
+export function BreweryDetailsPage() {
+    const {id} = useParams();
+    const [
+        breweryDetails,
+        setBreweryDetails
+    ] = useState<BreweryDetails | null>(null)
+
+    const getBreweryDetails = async () => {
+        const result = await fetch(`https://api.openbrewerydb.org/v1/breweries/${id}`);
+        const jsonResult = await result.json();
+        setBreweryDetails(jsonResult);
+    }
+
+    useEffect(() => {
+        getBreweryDetails().catch();
+    });
+
     return (
-      <>
-          <p>
-              Fill this in...
-          </p>
-      </>
+        <>
+            <StyledLink to='/'>Back to Breweries</StyledLink>
+            {
+              breweryDetails !== null ?
+                  <BreweryDetailsTable breweryDetails={breweryDetails}/> :
+                  <StyledParagraphWhite>
+                      Loading data...
+                  </StyledParagraphWhite>
+          }
+        </>
     );
 }
