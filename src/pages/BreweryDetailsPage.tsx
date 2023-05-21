@@ -29,9 +29,7 @@ export function BreweryDetailsPage() {
             {
                 breweryDetails !== null ?
                     <BreweryDetailsTable breweryDetails={breweryDetails}/> :
-                    <StyledParagraphWhite>
-                        Loading data...
-                    </StyledParagraphWhite>
+                    <StyledParagraphWhite>Loading data...</StyledParagraphWhite>
             }
         </>
     );
