@@ -9,7 +9,7 @@ export function BreweryDetailsPage() {
     const [
         breweryDetails,
         setBreweryDetails
-    ] = useState<BreweryDetails | null>(null)
+    ] = useState<BreweryDetails>();
 
     const getBreweryDetails = useCallback(
         async () => {
@@ -27,7 +27,7 @@ export function BreweryDetailsPage() {
         <>
             <StyledLink to='/'>Back to Breweries</StyledLink>
             {
-                breweryDetails !== null ?
+                breweryDetails ?
                     <BreweryDetailsTable breweryDetails={breweryDetails}/> :
                     <StyledParagraphWhite>Loading data...</StyledParagraphWhite>
             }

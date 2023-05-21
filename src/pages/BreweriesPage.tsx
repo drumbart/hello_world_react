@@ -13,7 +13,7 @@ export function BreweriesPage({breweries, getBreweries}: BreweriesPageProps) {
         <>
             <SearchBar getBreweries={getBreweries}/>
             {
-                breweries && breweries.length > 0 ? <BreweriesTable breweries={breweries}/> : <NoResults/>
+                breweries?.length ? <BreweriesTable breweries={breweries}/> : <NoResults/>
             }
         </>
     );
