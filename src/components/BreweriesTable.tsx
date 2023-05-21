@@ -19,9 +19,11 @@ export function BreweriesTable({breweries}: BreweriesTableProps) {
             {
                 breweries.map(brewery =>
                     <tr key={brewery.id}>
-                        <StyledLink to={`brewery_details/${brewery.id}`}>
-                            <StyledDataCell>{brewery.name}</StyledDataCell>
-                        </StyledLink>
+                        <StyledDataCell>
+                            <StyledLink to={`brewery_details/${brewery.id}`}>
+                                {brewery.name}
+                            </StyledLink>
+                        </StyledDataCell>
                         <StyledDataCell>{brewery.brewery_type}</StyledDataCell>
                         <StyledDataCell>{brewery.city}</StyledDataCell>
                         <StyledDataCell>{brewery.country}</StyledDataCell>

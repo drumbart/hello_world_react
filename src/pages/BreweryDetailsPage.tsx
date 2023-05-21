@@ -1,6 +1,6 @@
-import {Link, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {StyledLink, StyledParagraphWhite} from "../common/Styles";
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {BreweryDetails} from "../models/BreweryDetails";
 import {BreweryDetailsTable} from "../components/BreweryDetailsTable";
 
@@ -11,26 +11,28 @@ export function BreweryDetailsPage() {
         setBreweryDetails
     ] = useState<BreweryDetails | null>(null)
 
-    const getBreweryDetails = async () => {
-        const result = await fetch(`https://api.openbrewerydb.org/v1/breweries/${id}`);
-        const jsonResult = await result.json();
-        setBreweryDetails(jsonResult);
-    }
+    const getBreweryDetails = useCallback(
+        async () => {
+            const result = await fetch(`https://api.openbrewerydb.org/v1/breweries/${id}`);
+            const jsonResult = await result.json();
+            setBreweryDetails(jsonResult);
+        }, [id]
+    );
 
     useEffect(() => {
         getBreweryDetails().catch();
-    });
+    }, [getBreweryDetails]);
 
     return (
         <>
             <StyledLink to='/'>Back to Breweries</StyledLink>
             {
-              breweryDetails !== null ?
-                  <BreweryDetailsTable breweryDetails={breweryDetails}/> :
-                  <StyledParagraphWhite>
-                      Loading data...
-                  </StyledParagraphWhite>
-          }
+                breweryDetails !== null ?
+                    <BreweryDetailsTable breweryDetails={breweryDetails}/> :
+                    <StyledParagraphWhite>
+                        Loading data...
+                    </StyledParagraphWhite>
+            }
         </>
     );
 }
