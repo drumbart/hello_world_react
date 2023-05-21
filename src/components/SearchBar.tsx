@@ -7,6 +7,8 @@ interface SearchBarProps {
 }
 
 export function SearchBar(props: SearchBarProps) {
+    //useMemo() calls debounce() just once,
+    // while useCallback() during every re-rendering.
     const debouncedChangeHandler = useMemo(
         () => debounce((event: React.ChangeEvent<HTMLInputElement>) => {
             props.getBreweries(event.target.value).catch();
