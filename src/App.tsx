@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Brewery} from "./models/Brewery";
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {BreweriesPage} from "./pages/BreweriesPage";
 import {BreweryDetailsPage} from "./pages/BreweryDetailsPage";
 
